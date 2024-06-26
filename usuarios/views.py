@@ -1,37 +1,67 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login as django_login
 from usuarios.forms import NuestroFormularioDeCreacion
-
+from django.views import View
+from django.contrib.auth import logout
 
 def login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('inicio')  
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})     
     
-    formulario = AuthenticationForm()
-    
-    if request.method=='POST':
-        formulario=AuthenticationForm
-        if formulario.is_valid():
-            usuario = formulario.cleaned_data.get('username')
-            contrasenia = formulario.cleaned_data.get('password')
 
-            user = authenticate(username=usuario, password=contrasenia)
+
+
+
+# def login(request):
+    
+#     formulario = AuthenticationForm()
+    
+#     if request.method=='POST':
+#         formulario=AuthenticationForm
+#         if formulario.is_valid():
+#             usuario = formulario.cleaned_data.get('username')
+#             contrasenia = formulario.cleaned_data.get('password')
+
+#             user = authenticate(username=usuario, password=contrasenia)
             
-            django_login(request, user)
-            return redirect('inicio')
+#             django_login(request, user)
+#             return redirect('inicio')
     
     
-    return render(request, 'usuarios/login.html',{'formulario':formulario})
+#     return render(request, 'usuarios/login.html',{'formulario':formulario})
 
-def registro(request):
-    
-    formulario = NuestroFormularioDeCreacion()
-    
-    if request.method=='POST':
-        formulario= NuestroFormularioDeCreacion(request.POST)
+
+
+
+class Registrarse(View):
+    def get(self, request):
+        formulario = NuestroFormularioDeCreacion()
+        return render(request, "usuarios/registro.html", {'formulario': formulario})
+
+    def post(self, request):
+        formulario = NuestroFormularioDeCreacion(request.POST)
         if formulario.is_valid():
             formulario.save()
-            return redirect('login')
-                
-    
-    return render(request, 'usuarios/registro.html', {'formulario':formulario})
+            # Asegura que la redirección se hace correctamente
+            return redirect('login') 
+        else:
+            # Si el formularioulario no es válido, renderiza de nuevo la página con el formularioulario y errores
+            return render(request, "usuarios/registro.html", {'formulario': formulario})
+
+
+def logout_view(request):
+    logout(request)
+    return render(request,'usuarios/logout.html')         
+        
     
