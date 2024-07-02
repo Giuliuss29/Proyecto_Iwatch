@@ -1,3 +1,6 @@
 from django.contrib import admin
+from cinematografia.models import Peliculas, Series
 
-# Register your models here.
+
+admin.site.register(Peliculas)
+admin.site.register(Series)

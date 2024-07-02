@@ -4,7 +4,7 @@
 
 
 {% block h1_header %}
-<a href={% url "agregar_peli" %}>Agregar review</a>
+<a href={% url "agregar_series" %}>Agregar review</a>
 {% endblock h1_header %}
 
 {% block content %}
@@ -19,6 +19,7 @@
 <p>{{object.usuario}}</p>
 <p>{{object.director}}</p>
 <p>{{object.genero}}</p>
+<p>{{object.temporadas}}</p>
 <p>{{object.cuerpo}}</p>
 
 
@@ -29,7 +30,3 @@
 
 
 {% endblock content %}
-
-
-
-

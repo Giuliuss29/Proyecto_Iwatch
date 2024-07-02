@@ -23,27 +23,6 @@ def login(request):
 
 
 
-# def login(request):
-    
-#     formulario = AuthenticationForm()
-    
-#     if request.method=='POST':
-#         formulario=AuthenticationForm
-#         if formulario.is_valid():
-#             usuario = formulario.cleaned_data.get('username')
-#             contrasenia = formulario.cleaned_data.get('password')
-
-#             user = authenticate(username=usuario, password=contrasenia)
-            
-#             django_login(request, user)
-#             return redirect('inicio')
-    
-    
-#     return render(request, 'usuarios/login.html',{'formulario':formulario})
-
-
-
-
 class Registrarse(View):
     def get(self, request):
         formulario = NuestroFormularioDeCreacion()
