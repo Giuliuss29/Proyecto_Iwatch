@@ -10,10 +10,13 @@
 {% block content %}
 
 {%for object in object_list%}
+  <div class='row d-flex justify-content-center' style='border:5px solid #6a3d7d; border-radius:40px;'>
+    <div class='col-md-6 col-12 mx-auto mt-5 mb-5' style="text-align: center;">
+
 <h3> {{object.titulo}} </h3>
 <h4> {{object.subtitulo}} </h4>
 {% if object.img %}
-<img src="{{object.img.url}}" alt="">
+<img src="{{object.img.url}}" height='500px' alt="">
 {% endif %}
 <p>{{object.fecha}}</p>
 <p>{{object.usuario}}</p>
@@ -24,7 +27,20 @@
 
 
 
+{% if request.user.username == object.usuario.username %}
 
+<a href={% url "eliminar_serie" object.pk %}> Eliminar reseña </a>
+
+<a href={% url "editar_serie" object.pk %}> Editar reseña </a>
+
+
+{% endif %}
+
+
+
+
+    </div>
+</div>
 {%endfor%}
 
 

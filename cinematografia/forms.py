@@ -14,4 +14,7 @@ class FormSeries(forms.ModelForm):
         fields = ['titulo', 'subtitulo', 'img', 'cuerpo', 'director', 'genero', 'temporadas']
                 
 
+
+class BuscarPelis(forms.Form):
+    peli = forms.CharField(max_length=20)
         

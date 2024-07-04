@@ -1,13 +1,14 @@
 {% extends "base.html" %}
 
-{% block h1_header %}
-<a href={% url "agregar_peli" %}>Agregar review</a>
-{% endblock h1_header %}
+
 
 {% block content %}
-<h1>Listado de Películas y Series</h1>
+<h1 class='fw-bolder'>  Listado de Películas y Series</h1>
+<div class='row'>
 <ul>
     {% for item in page_obj %}
+      <div class='row d-flex justify-content-center' style='border:2px solid #4263cf; border-radius:40px;'>
+    <div class='col-md-6 col-12 mx-auto mt-5 mb-5' style="text-align: center;">
         <li>
             <h2>{{ item.titulo }}</h2>
             <h3>{{ item.subtitulo }}</h3>
@@ -20,10 +21,14 @@
             {% else %}
                 <a href="{% url 'detalle_serie' item.pk %}">Leer más</a>
             {% endif %}
-        </li>
-    {% endfor %}
-</ul>
 
+        </li>
+    </div>    
+    </div>
+    {% endfor %}
+        
+</ul>
+</div>
 <div>
     <span class="step-links">
         {% if page_obj.has_previous %}
