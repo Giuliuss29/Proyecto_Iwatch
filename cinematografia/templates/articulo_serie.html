@@ -4,10 +4,13 @@
 
 
 {% block h1_header %}
-<a href={% url "agregar_peli" %}>Agregar review</a>
+
 {% endblock h1_header %}
 
 {% block content %}
+
+<div class='row d-flex justify-content-center' style='border:5px solid #802920; border-radius:40px;'>
+    <div class='col-md-6 col-12 mx-auto mt-5 mb-5' style="text-align: center;">
 
 
 <h3> {{serie.titulo}} </h3>
@@ -22,7 +25,8 @@
 <p>{{serie.cuerpo}}</p>
 
 
-
+</div>
+</div>
 
 
 

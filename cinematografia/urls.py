@@ -16,7 +16,8 @@ urlpatterns = [
     path('<int:pk>/eliminar_serie',views.EliminarSerie.as_view(),name='eliminar_serie'),
     path('pelicula/<int:pk>/editar', views.Editar.as_view(),name = 'editar'),
     path('serie/<int:pk>/editar_serie', views.EditarSerie.as_view(),name = 'editar_serie'),
-    path('perfil/', perfil, name='perfil')
+    path('perfil/', perfil, name='perfil'),
+    
     
     
     
